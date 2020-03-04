@@ -3,12 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\GetInfo;
-use mysql_xdevapi\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HomepageController extends AbstractController
+
+class LearningController extends AbstractController
 {
+
     /**
      * @Route(name="homepage")
      */
@@ -22,10 +23,10 @@ class HomepageController extends AbstractController
 
 
         //if(empty($_POST)){
-            //$user = $nameDisplay->getName($_POST['name']);
+        $user = $nameDisplay->getName($_POST['name']);
 //            $testuser =
 //            $_POST['name'] = 'unknown';
-            //echo "empty post";
+        //echo "empty post";
 
         //}
 
@@ -36,13 +37,13 @@ class HomepageController extends AbstractController
 
 
 //            $sesUsername = $_POST['username'];
-           echo "issetPost en session";
+            echo "issetPost en session";
 
         }
 
         if (isset($_POST['submit'])) {
-           echo "lowmo";
-           $this->redirectToRoute(learning,[$sesUsername->getInfo]);
+            echo "lowmo";
+            $this->redirectToRoute('learning',['name'=>$username->getName($user)]);
 
         }
         //resetter
@@ -53,24 +54,31 @@ class HomepageController extends AbstractController
 
         }
 
-        return $this->render('homepage/index.html.twig', [
+        return $this->render('learning/index.html.twig', [
             'controller_name' => $sesUsername,
         ]);
 
 
     }
+
+
+
+    /**
+     * @Route("/learning", name="learning")
+     */
+    public function showName($username)
+    {
+        $nameDisplay = new GetInfo();
+        $user = $nameDisplay->getName($_POST['name']);
+
+        return $this->render('learning/index.html.twig', [
+            'controller_name' => 'dfssdf',
+        ]);
+    }
+
+
 }
 
-function whatIsHappening()
-{
-    echo '<h2>$_GET</h2>';
-    var_dump($_GET);
-    echo '<h2>$_POST</h2>';
-    var_dump($_POST);
-    echo '<h2>$_COOKIE</h2>';
-    var_dump($_COOKIE);
-    echo '<h2>$_SESSION</h2>';
-    var_dump($_SESSION);
-}
 
-whatIsHappening();
+
+

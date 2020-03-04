@@ -15,12 +15,18 @@ class GetInfo
      */
 
     private $name;
+    private $username;
 
     public function getName($name){
         $this->name = $name;
         return $this->name;
     }
 
+    public function getUsername($username){
+        $this->username = $username;
+        return $this->username;
+    }
 
 }
+
 
